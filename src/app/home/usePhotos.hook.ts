@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import homeSlice from './home.reducer';
@@ -27,6 +27,7 @@ export type UsePhotosType = {
 };
 
 const usePhotos = (): UsePhotosType => {
+  const [flag, setFlag] = useState(false);
   const { setNextDate } = homeSlice.actions;
 
   const currentDate = useSelector(
@@ -41,10 +42,11 @@ const usePhotos = (): UsePhotosType => {
 
   useEffect(() => {
     dispatch(setNextDate(new Date()));
+    setFlag(true);
   }, [dispatch]);
 
   useEffect(() => {
-    if (currentDate && apiDate) {
+    if (currentDate && apiDate && flag) {
       fetchData(URL);
     }
   }, [currentDate]);
