@@ -2,12 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import subDays from 'date-fns/subDays';
 
 type InitialStateType = {
-  currentDate: Date | null;
   viewedDates: Date[];
 };
 
 export const initialState: InitialStateType = {
-  currentDate: null,
   viewedDates: [],
 };
 

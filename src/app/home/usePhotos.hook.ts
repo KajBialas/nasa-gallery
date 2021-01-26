@@ -34,7 +34,7 @@ const usePhotos = (): UsePhotosType => {
     (state: RootState) => state.home.viewedDates[0],
   );
 
-  const apiDate = format(new Date(currentDate), 'yyyy-MM-dd');
+  const apiDate = currentDate && format(new Date(currentDate), 'yyyy-MM-dd');
   const URL = `${API_URL}&date=${apiDate}`;
   const { response, isLoading, error, fetchData } = useFetch();
 
