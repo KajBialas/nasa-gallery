@@ -3,24 +3,49 @@ import { format } from 'date-fns';
 import Content from '../../components/content/content.component';
 import usePhotos from './usePhotos.hook';
 import Image from '../../components/image/image.component';
+import {
+  StyledNoPhotoPlaceholder,
+  StyledButton,
+  StyledPhotoDescription,
+} from './home.style';
+import { LANG } from '../../lang/en';
 
 const Home: React.FC = () => {
-  const { currentDate, isLoading, handleNextPhoto, details } = usePhotos();
+  const {
+    currentDate,
+    isLoading,
+    handleNextPhoto,
+    details,
+    handleAddFavourite,
+  } = usePhotos();
 
   return (
     <Content>
       <>
-        <div>{currentDate && format(new Date(currentDate), 'yyyy-MM-dd')}</div>
+        <StyledPhotoDescription>
+          {LANG.photoDescription}
+          <span>
+            {currentDate && format(new Date(currentDate), 'dd.MM.yyyy')}
+          </span>
+        </StyledPhotoDescription>
         <div>
           {details?.media_type === 'image' ? (
             <Image src={details?.url} loading={isLoading} />
           ) : (
-            <div>For this day picture isnt available</div>
+            <StyledNoPhotoPlaceholder>
+              {LANG.noPhotoPlaceholder}
+            </StyledNoPhotoPlaceholder>
           )}
         </div>
-        <button type="button" onClick={handleNextPhoto}>
-          Next Day
-        </button>
+        <StyledButton type="button" onClick={handleNextPhoto}>
+          {LANG.nextButtonText}
+        </StyledButton>
+        <StyledButton
+          type="button"
+          onClick={() => handleAddFavourite(currentDate)}
+        >
+          {LANG.favouritesButtonText}
+        </StyledButton>
       </>
     </Content>
   );

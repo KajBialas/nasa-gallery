@@ -3,10 +3,12 @@ import subDays from 'date-fns/subDays';
 
 type InitialStateType = {
   viewedDates: Date[];
+  favourites: Date[];
 };
 
 export const initialState: InitialStateType = {
   viewedDates: [],
+  favourites: [],
 };
 
 export default createSlice({
@@ -24,6 +26,9 @@ export default createSlice({
       if (action.payload) {
         state.viewedDates = [action.payload];
       }
+    },
+    addFavourite: (state, action: PayloadAction<Date>): void => {
+      state.favourites = [...state.favourites, action.payload];
     },
   },
 });

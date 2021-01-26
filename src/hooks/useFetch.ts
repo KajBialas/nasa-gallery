@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { PhotoDetails } from '../app/home/usePhotos.hook';
+import { PhotoDetailsType } from '../app/home/home.types';
 
 type UseFetchType = {
-  response: PhotoDetails | null;
+  response: PhotoDetailsType | null;
   isLoading: boolean;
   error: string | null;
   fetchData: (uri: string) => void;

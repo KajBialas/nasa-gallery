@@ -5,30 +5,11 @@ import homeSlice from './home.reducer';
 import { RootState } from '../app.reducer';
 import useFetch from '../../hooks/useFetch';
 import { API_URL } from '../../definition/API';
-
-export type PhotoDetails = {
-  copyright: string;
-  date: string;
-  explanation: string;
-  hdurl: string;
-  /* eslint-disable camelcase */
-  media_type: 'image' | 'video';
-  service_version: string;
-  /* eslint-enable camelcase */
-  title: string;
-  url: string;
-};
-
-export type UsePhotosType = {
-  currentDate: Date;
-  handleNextPhoto: () => void;
-  isLoading: boolean;
-  details: PhotoDetails | null;
-};
+import { UsePhotosType } from './home.types';
 
 const usePhotos = (): UsePhotosType => {
   const [flag, setFlag] = useState(false);
-  const { setNextDate } = homeSlice.actions;
+  const { setNextDate, addFavourite } = homeSlice.actions;
 
   const currentDate = useSelector(
     (state: RootState) => state.home.viewedDates[0],
@@ -52,10 +33,12 @@ const usePhotos = (): UsePhotosType => {
   }, [currentDate]);
 
   const handleNextPhoto = () => dispatch(setNextDate());
+  const handleAddFavourite = (date: Date) => dispatch(addFavourite(date));
 
   return {
     currentDate,
     handleNextPhoto,
+    handleAddFavourite,
     isLoading,
     details: response,
   };
