@@ -6,4 +6,5 @@ export const LANG = {
   nextButtonText: 'Next',
   favouritesButtonText: 'Add to favourites',
   photoDescription: 'This is amazing photo from day: ',
+  fovouritesHeader: 'Favourites',
 };

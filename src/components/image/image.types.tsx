@@ -1,6 +1,6 @@
 export type PropsImageType = {
   src: string;
-  loading: boolean;
+  loading?: boolean;
 };
 
 export type PropsStyledImageType = {
